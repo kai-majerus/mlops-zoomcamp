@@ -1,3 +1,1 @@
 # mlops-zoomcamp
-
-Local

@@ -210,3 +210,6 @@ __marimo__/
 # Data & models folders
 data/
 models/
+
+# Mlflow
+mlflow.db
