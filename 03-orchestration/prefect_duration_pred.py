@@ -1,9 +1,8 @@
-from duration_prediction import read_dataframe, create_X, train_model
-
-from prefect import flow, task
-
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from datetime import datetime
+from prefect import flow, task
+from duration_prediction import read_dataframe, create_X, train_model
+print("🔥 FILE IS EXECUTING")
 
 
 def get_dates():
@@ -94,6 +93,8 @@ def taxi_training_pipeline(year: int | None = None, month: int | None = None):
 
 
 if __name__ == "__main__":
+
+    print('running script...')
     import argparse
 
     parser = argparse.ArgumentParser()
@@ -101,13 +102,16 @@ if __name__ == "__main__":
     parser.add_argument('--month', type=int, required=False)
     parser.add_argument('--serve', action='store_true', help="Run Prefect scheduler")
 
+    print(f'parsing arguments... {parser.parse_args()}')
+
     args = parser.parse_args()
 
     if args.serve:
+        print('starting scheduler...')
         # START SCHEDULER (does NOT run pipeline immediately)
         taxi_training_pipeline.serve(
             name="my-first-deployment",
-            cron="5 9 * * *"
+            cron="0 10 * * *",
         )
     else:
         # RUN PIPELINE IMMEDIATELY (manual / backfill mode)
